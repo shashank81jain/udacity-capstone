@@ -134,24 +134,24 @@ workflows:
           requires:
             - "run-lint"
       - create-small-cluster:
-          cluster-name: namitcapstoneprj-cluster-deployment
+          cluster-name: namitcapstoneprj-cluster-deployment-v2
           requires:
             - "push-docker-image"
       - deploy-application:
-         cluster-name: namitcapstoneprj-cluster-deployment
+         cluster-name: namitcapstoneprj-cluster-deployment-v2
          aws-region: $AWS_DEFAULT_REGION
          requires:
             - create-small-cluster
 #            - push-docker-image
       - aws-eks/update-container-image:
-          cluster-name: namitcapstoneprj-cluster-deployment
+          cluster-name: namitcapstoneprj-cluster-deployment-v2
           container-image-updates: 'namitcapstoneprj=namitcapstoneprj:latest'
           record: true
           requires:
             - deploy-application
           resource-name: deployment/namitcapstoneprj      
       - test-application:
-          cluster-name: namitcapstoneprj-cluster-deployment
+          cluster-name: namitcapstoneprj-cluster-deployment-v2
           aws-region: $AWS_DEFAULT_REGION
           requires:
             #- aws-eks/update-container-image
