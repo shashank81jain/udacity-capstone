@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: namitcapstoneprj
+  labels:
+    app: namitcapstoneprj
+spec:
+  selector:
+    matchLabels:
+      app: namitcapstoneprj
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: namitcapstoneprj
+    spec:
+      containers:
+      - name: namitcapstoneprj
+        image: namit11/namitcapstoneprj
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 80
