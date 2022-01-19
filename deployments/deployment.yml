@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: namitcapstoneprj
+  name: shashankcapstone
   labels:
-    app: namitcapstoneprj
+    app: shashankcapstone
 spec:
   selector:
     matchLabels:
-      app: namitcapstoneprj
+      app: shashankcapstone
   replicas: 1
   strategy:
     type: RollingUpdate
@@ -17,11 +17,11 @@ spec:
   template:
     metadata:
       labels:
-        app: namitcapstoneprj
+        app: shashankcapstone
     spec:
       containers:
-      - name: namitcapstoneprj
-        image: namit11/namitcapstoneprj
+      - name: shashankcapstone
+        image: shashank81jain/shashankcapstone
         resources:
           requests:
             cpu: 100m
