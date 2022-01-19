@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: namitcapstoneprj
+  name: shashankcapstone
 #  namespace: eks-capstone-ns
   labels:
-    app: namitcapstoneprj
+    app: shashankcapstone
 spec:
   type: LoadBalancer
   selector:
-    app: namitcapstoneprj
+    app: shashankcapstone
   ports:
     - protocol: TCP
       port: 80
