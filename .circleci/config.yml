@@ -34,10 +34,10 @@ jobs:
             name: Push Docker Image
             command: |
               export TAG=v${CIRCLE_BUILD_NUM}
-              export IMAGE_NAME=namitcapstoneprj
-              docker build -t namit11/$IMAGE_NAME .
-              docker login -u namit11 -p Bullet1477 
-              docker push namit11/$IMAGE_NAME
+              export IMAGE_NAME=shashankcapstone
+              docker build -t shashank81jain/$IMAGE_NAME .
+              docker login -u shashank81jain -p Trishik@123 
+              docker push shashank81jain/$IMAGE_NAME
   # creating kubernetes cluster in aws            
     create-small-cluster:
       executor: aws-eks/python3
@@ -75,7 +75,7 @@ jobs:
             node-type: t2.small
             nodes-max: 2
             ssh-access: false
-            ssh-public-key: 'udacity-fresh-working-key'   
+            ssh-public-key: 'udapeople'   
     # deploy app using templates               
     deploy-application:
       executor: aws-eks/python3
@@ -98,10 +98,10 @@ jobs:
         - kubernetes/create-or-update-resource:
             get-rollout-status: true
             resource-file-path: "deployments/deployment.yml"
-            resource-name: deployment/namitcapstoneprj
+            resource-name: deployment/shashankcapstone
         - kubernetes/create-or-update-resource:
             resource-file-path: "deployments/service.yml"
-            resource-name: Service/namitcapstoneprj    
+            resource-name: Service/shashankcapstone    
 
     test-application:
         executor: aws-eks/python3
@@ -134,24 +134,24 @@ workflows:
           requires:
             - "run-lint"
       - create-small-cluster:
-          cluster-name: namitcapstoneprj-cluster-deployment-v2
+          cluster-name: shashankcapstone-cluster-deployment
           requires:
             - "push-docker-image"
       - deploy-application:
-         cluster-name: namitcapstoneprj-cluster-deployment-v2
+         cluster-name: shashankcapstone-cluster-deployment
          aws-region: $AWS_DEFAULT_REGION
          requires:
             - create-small-cluster
 #            - push-docker-image
       - aws-eks/update-container-image:
-          cluster-name: namitcapstoneprj-cluster-deployment-v2
-          container-image-updates: 'namitcapstoneprj=namitcapstoneprj:latest'
+          cluster-name: shashankcapstone-cluster-deployment
+          container-image-updates: 'shashankcapstone=shashankcapstone:latest'
           record: true
           requires:
             - deploy-application
-          resource-name: deployment/namitcapstoneprj      
+          resource-name: deployment/shashankcapstone      
       - test-application:
-          cluster-name: namitcapstoneprj-cluster-deployment-v2
+          cluster-name: shashankcapstone-cluster-deployment
           aws-region: $AWS_DEFAULT_REGION
           requires:
             #- aws-eks/update-container-image
